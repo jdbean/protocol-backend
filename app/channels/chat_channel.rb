@@ -7,3 +7,5 @@ class ChatChannel < ApplicationCable::Channel
       ActionCable.server.broadcast "chat_#{params[:room]}", data
     end
 end
+
+# channel.send({to: 'chat_new_room', message: "Hello New Room!"})

@@ -1,14 +1,37 @@
+require 'byebug'
+# module ApplicationCable
+#   class Connection < ActionCable::Connection::Base
+#     identified_by :current_user
+#
+#     def connect
+#       byebug
+#       self.current_user = find_verified_user
+#     end
+#
+#     private
+#       def find_verified_user
+#         byebug
+#         if verified_user = User.find_by(name: "Jeremy")
+#           verified_user
+#         else
+#           reject_unauthorized_connection
+#         end
+#       end
+#   end
+# end
+
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :current_api_v1_user
+    identified_by :current_user
 
-    rescue_from ActiveRecord::RecordNotFound, JWT::DecodeError, CustomErrorClass do
-      reject_unauthorized_connection
-    end
+    # rescue_from ActiveRecord::RecordNotFound, JWT::DecodeError, CustomErrorClass do
+    #   reject_unauthorized_connection
+    # end
 
     def connect
-      @jwt_token = request.params[:token] || raise(CustomErrorClass)
-      self.current_api_v1_user = find_verified_user
+      @jwt_token = request.params[:token]
+      # || raise(CustomErrorClass)
+      self.current_user = find_verified_user
     end
 
     private

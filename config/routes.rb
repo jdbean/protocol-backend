@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post 'user_token' => 'user_token#create'
+  # post 'user_token' => 'user_token#create'
   mount ActionCable.server => '/cable'
 
   namespace :api do

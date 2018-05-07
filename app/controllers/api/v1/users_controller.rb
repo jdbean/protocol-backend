@@ -1,8 +1,8 @@
-module API
+module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user, only: [:show, :update, :destroy]
-
+      before_action :authenticate_v1_user
       # GET /users
       # def index
       #   @users = User.all
@@ -50,6 +50,8 @@ module API
         def user_params
           params.require(:user).permit(:name, :language)
         end
+
+
     end
   end
-end  
+end

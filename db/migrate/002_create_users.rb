@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.string :name
       t.belongs_to :language, index: true, foreign_key: true
+      t.string :password_digest 
       t.timestamps
     end
   end

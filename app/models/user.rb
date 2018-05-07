@@ -1,3 +1,4 @@
 class User < ApplicationRecord
-  belongs_to :language 
+  has_secure_password
+  belongs_to :language
 end

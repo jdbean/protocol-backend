@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   # post 'user_token' => 'user_token#create'
   mount ActionCable.server, at: '/cable'
 

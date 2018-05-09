@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2018_05_08_224946) do
 
   create_table "messages", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "body"
+    t.string "message"
     t.bigint "channel_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

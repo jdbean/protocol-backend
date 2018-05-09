@@ -12,7 +12,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create message" do
     assert_difference('Message.count') do
-      post messages_url, params: { message: { body: @message.body, channel: @message.channel, sender: @message.sender } }, as: :json
+      post messages_url, params: { message: { message: @message.message, channel: @message.channel, sender: @message.sender } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update message" do
-    patch message_url(@message), params: { message: { body: @message.body, channel: @message.channel, sender: @message.sender } }, as: :json
+    patch message_url(@message), params: { message: { message: @message.message, channel: @message.channel, sender: @message.sender } }, as: :json
     assert_response 200
   end
 

@@ -7,8 +7,8 @@ class ChatChannel < ApplicationCable::Channel
   def subscribed
     @user = User.find_by(name: params[:username])
     @channel = Channel.find_or_create_by(title: params[:room])
-    @membership = Membership.new(user: @user, channel: @channel)
-    # @user.channel << @channel
+    # @membership = Membership.new(user: @user, channel: @channel)
+    @user.channels << @channel
 
     # if !@@members["chat_#{params[:room]}"]
     #   @@members["chat_#{params[:room]}"] = Array.new

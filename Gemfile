@@ -6,6 +6,7 @@ gem 'google-cloud-translate'
 gem 'active_model_serializers'
 gem 'jwt'
 gem 'simple_command'
+gem 'figaro'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record

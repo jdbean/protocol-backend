@@ -21,3 +21,4 @@ keys.json
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+keys.json

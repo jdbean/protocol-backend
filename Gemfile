@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.3.3'
+gem 'google-cloud-translate'
 gem 'active_model_serializers'
 gem 'jwt'
 gem 'simple_command'

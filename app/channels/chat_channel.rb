@@ -1,19 +1,21 @@
 class ChatChannel < ApplicationCable::Channel
 
-  @@members = {}
+  # @@members = {}
   # Temporary storage of subscriptions list
   # Pending multi-channel features and persistence
 
   def subscribed
     @user = User.find_by(name: params[:username])
     @channel = Channel.find_or_create_by(title: params[:room])
-    @channelmembership = ChannelMembership.new(user: @user, channel: @channel)
+    @membership = Membership.new(user: @user, channel: @channel)
+    # @user.channel << @channel
 
     # if !@@members["chat_#{params[:room]}"]
     #   @@members["chat_#{params[:room]}"] = Array.new
     # end
     # @@members["chat_#{params[:room]}"] << params[:username]
     # @@members["chat_#{params[:room]}"] = @@members["chat_#{params[:room]}"].uniq
+
     stream_from "chat_#{params[:room]}"
   end
 
@@ -25,9 +27,11 @@ class ChatChannel < ApplicationCable::Channel
     # byebug
     @user = User.find_by(name: params[:username])
     @channel = Channel.find_or_create_by(title: params[:room])
-    message_data = {user: @user, body: data["message"], channel: @channel}
+    @message_data = {user: @user, body: data["message"], channel: @channel}
     data["message_type"] = "message"
-    @message = Message.new(message_data)
+    @message = Message.new(@message_data)
+
+
     if @message.save
       ActionCable.server.broadcast "chat_#{params[:room]}", data
     else

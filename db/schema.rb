@@ -15,15 +15,6 @@ ActiveRecord::Schema.define(version: 2018_05_08_224946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "channel_memberships", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "channel_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_channel_memberships_on_channel_id"
-    t.index ["user_id"], name: "index_channel_memberships_on_user_id"
-  end
-
   create_table "channels", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -35,6 +26,15 @@ ActiveRecord::Schema.define(version: 2018_05_08_224946) do
     t.string "vernacular"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_memberships_on_channel_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|

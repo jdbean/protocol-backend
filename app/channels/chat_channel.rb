@@ -5,6 +5,7 @@ class ChatChannel < ApplicationCable::Channel
   # Pending multi-channel features and persistence
 
   def subscribed
+
     @user = User.find_by(name: params[:username])
     @channel = Channel.find_or_create_by(title: params[:room])
     # @membership = Membership.new(user: @user, channel: @channel)
@@ -24,15 +25,14 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    # byebug
-    @user = User.find_by(name: params[:username])
+    @user = User.find_by(name: data['sender'])
     @channel = Channel.find_or_create_by(title: params[:room])
     @message_data = {user: @user, body: data["message"], channel: @channel}
     data["message_type"] = "message"
     @message = Message.new(@message_data)
-
-
-    if @message.save
+    if @message.valid?
+      @message.save
+    
       ActionCable.server.broadcast "chat_#{params[:room]}", data
     else
       ActionCable.server.broadcast "chat_#{params[:room]}", {message_type: "message_error", errors: @message.errors, notice: "errors", status: :unprocessable_entity}

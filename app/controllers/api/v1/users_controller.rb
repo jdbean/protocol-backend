@@ -28,6 +28,7 @@ module Api
 
       # PATCH/PUT /users/1
       def update
+      
         if @user.update(user_params)
           render json: @user
         else
@@ -48,7 +49,7 @@ module Api
 
         # Only allow a trusted parameter "white list" through.
         def user_params
-          params.require(:user).permit(:name, :language)
+          params.require(:user).permit(:name, :language_id)
         end
 
 

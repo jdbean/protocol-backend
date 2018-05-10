@@ -4,7 +4,7 @@ class TranslationController < ApplicationController
 def translate
 
 text = translation_params[:text]
-language_code = 'en'
+language_code = translation_params[:language]
 key_file = 'keys.json'
 project_id = 'stable-device-201314'
     translate   = Google::Cloud::Translate.new project: project_id, keyfile: key_file

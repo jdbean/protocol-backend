@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  mount ActionCable.server, at: '/cable'
   resources :messages
   resources :channels
   # post 'user_token' => 'user_token#create'
-  mount ActionCable.server, at: '/cable'
+
 
   namespace :api do
     namespace :v1 do

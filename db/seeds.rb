@@ -112,3 +112,4 @@ Language.create(vernacular: "Zulu", code: "zu")
 
 User.create(name: "Jeremy", language: Language.find_by(vernacular: "English"), password: "password")
 User.create(name: "JD", language: Language.find_by(vernacular: "Spanish"), password: "password")
+User.create(name: "Dick", language: Language.find_by(vernacular: "Chinese"), password: "password")

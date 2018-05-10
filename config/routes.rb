@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :messages
+  resources :channels
   # post 'user_token' => 'user_token#create'
   mount ActionCable.server, at: '/cable'
 

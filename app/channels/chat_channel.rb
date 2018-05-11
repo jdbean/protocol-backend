@@ -25,14 +25,15 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
+  
     @user = User.find_by(name: data['sender'])
     @channel = Channel.find_or_create_by(title: params[:room])
     @message_data = {user: @user, message: data["message"], channel: @channel}
-    data["message_type"] = "message"
+
     @message = Message.new(@message_data)
     if @message.valid?
       @message.save
-
+      data["message_type"] = "message"
       ActionCable.server.broadcast "chat_#{params[:room]}", data
     else
       ActionCable.server.broadcast "chat_#{params[:room]}", {message_type: "message_error", errors: @message.errors, notice: "errors", status: :unprocessable_entity}
